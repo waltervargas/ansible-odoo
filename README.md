@@ -1,4 +1,4 @@
-## Odoo (OpenERP) 8 Ansible Playbooks
+## Odoo (OpenERP) 8 Ansible Playbooks for Debian
 
 ### Setup dev enviroment
 
