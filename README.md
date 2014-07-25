@@ -19,21 +19,18 @@ $ ansible-playbook -i develop site.yml
 
 #### Vagrant
 
-Vagrant file features:
-
  - IP Address: 192.168.33.2
  - Share ../addons folder with odoo local addons path (Make this folder before run)
  - Share ~/git/odoo folder to /opt/odoo (Clone odoo here before run)
 
 #### Postgres Role
 
-Postgres role features:
-
  - Install postgresql 9.3 from http://apt.postgresql.org/pub/repos/apt/
  - Create openerp role in postgresql
  
 #### Nginx Role
  
-Postgres role features:
- 
   - Install nginx
+  - Setup gzip level 9 for javascript files
+  - Setup cache for odoo static files
+  - Setup nginx as reverse proxy for odoo
