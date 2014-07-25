@@ -1,0 +1,2 @@
+aptproxy: true
+run_git_clone: false

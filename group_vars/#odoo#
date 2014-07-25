@@ -1,0 +1,6 @@
+prefix: /opt
+odoo_path: /opt/odoo
+odoo_user: openerp
+odoo_etc_path: /etc/openerp
+odoo_log_path: /var/log/openerp
+zip_url: https://api.github.com/repos/odoo/odoo/zipball/8.0

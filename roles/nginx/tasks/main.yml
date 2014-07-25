@@ -1,0 +1,7 @@
+ - name: Install nginx
+   apt: name=nginx state=present
+
+ - name: Configure Nginx
+   template: src=nginx_odoo.j2 dest=/etc/nginx/conf.d/nginx_odoo.conf owner=root group=root mode=0644
+   notify:
+     - restart nginx

@@ -1,0 +1,6 @@
+  - hosts: odoo
+    roles:
+      - common
+      - postgresql
+      - odoo
+      - nginx

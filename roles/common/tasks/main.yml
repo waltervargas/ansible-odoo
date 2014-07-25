@@ -1,0 +1,13 @@
+ - name: apt proxy config
+   copy: src=02aptproxy dest=/etc/apt/apt.conf.d/02aptproxy
+   when: aptproxy
+
+ - name: base debian packages
+   apt: name={{ item }} state=present
+   with_items:
+     - git
+     - screen
+     - less
+     - lsof
+     - unzip
+     - python-psycopg2

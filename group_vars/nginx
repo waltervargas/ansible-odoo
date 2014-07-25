@@ -1,0 +1,2 @@
+server_name: catmenel.com.ve
+proxy_pass: http://localhost:8069;

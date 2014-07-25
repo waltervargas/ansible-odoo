@@ -1,0 +1,31 @@
+gzip_comp_level 9;
+gzip_buffers 16 8k;
+gzip_http_version 1.1;
+gzip_types text/plain text/css application/javascript application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+server {
+       server_name {{ server_name }};
+       listen 80;
+       proxy_buffers 16 64k;
+       proxy_buffer_size 128k;
+
+       location / {
+       		proxy_set_header Host $host;
+                proxy_pass {{ proxy_pass }}
+                proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+                proxy_redirect off;
+
+                # set headers
+                proxy_set_header    Host            $host;
+                proxy_set_header    X-Real-IP       $remote_addr;
+                proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header    X-Forwarded-Proto https;
+        }
+
+        location ~* /web/static/ {
+                proxy_cache_valid 200 60m;
+                proxy_buffering on;
+                expires 864000;
+                proxy_pass {{ proxy_pass }}
+        }
+}

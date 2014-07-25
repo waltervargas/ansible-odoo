@@ -1,0 +1,81 @@
+ - name: Clone odoo 8 from git
+   git: repo=https://github.com/odoo/odoo.git
+        dest=/opt/odoo
+        version=8.0
+        depth=1 
+   when: run_git_clone
+        
+ - name: Odoo system group
+   group: system=yes state=present name={{ odoo_user }} 
+   
+ - name: Odoo system user
+   user: system=yes state=present shell=/bin/false home=/home/odoo name={{ odoo_user }}
+
+ - name: Odoo path permissions (1/2)
+   file: path={{ odoo_path }} owner={{ odoo_user }} group={{ odoo_user }} mode=0744 state=directory
+
+ - name: Odoo path permissions (2/2)
+   file: path={{ odoo_path }} owner={{ odoo_user }} group={{ odoo_user }} mode=0744 state=directory
+
+ - name: Odoo etc directory
+   file: path={{ odoo_etc_path }} owner={{ odoo_user }} group={{ odoo_user }} mode=0744 state=directory
+   
+ - name: Odoo config file
+   copy: src=openerp-server.conf dest={{ odoo_etc_path }} owner={{ odoo_user }} group={{ odoo_user }}  mode=0640
+
+ - name: Odoo log directory
+   file: path={{ odoo_log_path }} owner={{ odoo_user }} group={{ odoo_user }} mode=0744 state=directory
+       
+ - name: Installs odoo dependencies via debian
+   apt: name={{ item }} state=present
+   with_items:
+     - adduser
+     - python
+     - postgresql-client
+     - python-dateutil
+     - python-decorator
+     - python-docutils
+     - python-feedparser
+     - python-gdata
+     - python-imaging
+     - python-jinja2
+     - python-ldap
+     - python-libxslt1
+     - python-lxml
+     - python-mako
+     - python-mock
+     - python-openid
+     - python-passlib
+     - python-psutil
+     - python-psycopg2
+     - python-pybabel
+     - python-pychart
+     - python-pydot
+     - python-pyparsing
+     - python-pypdf
+     - python-reportlab
+     - python-requests
+     - python-simplejson
+     - python-tz
+     - python-unittest2
+     - python-vatnumber
+     - python-vobject
+     - python-webdav
+     - python-werkzeug
+     - python-xlwt
+     - python-yaml
+     - python-zsi
+
+ - name: Odoo init script
+   copy: src=openerp.init dest=/etc/init.d/openerp mode=0755
+
+ - name: Directory Permissions
+   file: path={{ item }} owner={{ odoo_user }} group={{ odoo_user }} mode=0744 state=directory
+   with_items:
+     - /var/lib/openerp/filestore
+     - /var/lib/openerp
+
+ - name: update-rc.d openerp install
+   command: update-rc.d openerp defaults
+   notify:
+     - restart odoo
