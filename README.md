@@ -6,7 +6,7 @@
 2. Run ansible-playbook setup.yml
  
    ```sh
-$ ansible-playbook -c paramiko -i hosts -l dev setup.yml --ask-pass --sudo
+$ ansible-playbook -c paramiko -i develop setup.yml --ask-pass --sudo
 ```
 
 3. Run ansible-playbook site.yml
