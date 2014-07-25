@@ -15,13 +15,24 @@ $ ansible-playbook -c paramiko -i develop setup.yml --ask-pass --sudo
 $ ansible-playbook -i develop site.yml 
 ```
 
+### Requirements
+
+1. ansible 1.6
+2. vagrant 1.6
+
 ### Description by components
 
 #### Vagrant
 
  - IP Address: 192.168.33.2
- - Share ../addons folder with odoo local addons path (Make this folder before run)
- - Share ~/git/odoo folder to /opt/odoo (Clone odoo here before run)
+ - Share `../addons` folder with odoo local addons path (Make this folder before run)
+ - Share `~/git/odoo` folder to `/opt/odoo` (Clone odoo here before run)
+
+#### Common Role
+
+ - Setup apt of virtualmachine to use the realmachine as apt proxy
+   (edit the file `roles/common/files/02aptproxy` and set yout apt-cacher here)
+ - Install base debian packages
 
 #### Postgres Role
 
