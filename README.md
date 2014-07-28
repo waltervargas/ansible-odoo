@@ -45,3 +45,4 @@ $ ansible-playbook -i develop site.yml
   - Setup gzip level 9 for javascript files
   - Setup cache for odoo static files
   - Setup nginx as reverse proxy for odoo
+  - Setup SSL and copy cert and key (place server_name.key and server_name.crt in `nginx/files/` folder)
